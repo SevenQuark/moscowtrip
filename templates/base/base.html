@@ -42,7 +42,7 @@
             function initialize() {
                 var mapOptions = {
                     center: new google.maps.LatLng(55.7522222, 37.6155556),
-                    zoom: 11,
+                    zoom: 13,
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 };
                 var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
@@ -52,6 +52,10 @@
 
                     if (category === 'park') {
                         icon = '/static/img/park_round.png'
+                    } else if (category === 'museum') {
+                        icon = '/static/img/museum_round.png'
+                    } else if (category === 'night') {
+                        icon = '/static/img/club_round.png'
                     }
 
                     var myLatLng = new google.maps.LatLng(p.location.lat, p.location.lng);
@@ -142,18 +146,18 @@
                     heatmap.setOptions({radius: heatmap.get('radius') ? null : 28});
                 };
 
-                $.getJSON('/places/', function(data) {
+                $.getJSON('/places/?category=museum,night', function(data) {
                     var p1 = _.map(data.p1, function(p) {
-                        setPoint(p, 'park');
-                        return new google.maps.LatLng(p.location.lat, p.location.lng);
+                        setPoint(p.data, p.category);
+                        return new google.maps.LatLng(p.data.location.lat, p.data.location.lng);
                     });
                     var p2 = _.map(data.p2, function(p) {
-                        setPoint(p, 'park');
-                        return new google.maps.LatLng(p.location.lat, p.location.lng);
+                        setPoint(p.data, p.category);
+                        return new google.maps.LatLng(p.data.location.lat, p.data.location.lng);
                     });
                     var p3 = _.map(data.p3, function(p) {
-                        setPoint(p, 'park');
-                        return new google.maps.LatLng(p.location.lat, p.location.lng);
+                        setPoint(p.data, p.category);
+                        return new google.maps.LatLng(p.data.location.lat, p.data.location.lng);
                     });
 
                     drawHitmap(p1, 1);
