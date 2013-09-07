@@ -43,10 +43,36 @@
             function initialize() {
                 var mapOptions = {
                     center: new google.maps.LatLng(55.7522222, 37.6155556),
-                    zoom: 10,
+                    zoom: 11,
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 };
                 var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+                var infowindow = null;
+                var setPoint = function(p, category) {
+                    var icon;
+                    if (infowindow) {
+                        infowindow.close();
+                    }
+
+                    if (category === 'park') {
+                        icon = '/static/img/park.png'
+                    }
+
+                    var myLatLng = new google.maps.LatLng(p.location.lat, p.location.lng);
+                    var marker = new google.maps.Marker({
+                        position: myLatLng,
+                        map: map,
+                        icon: icon
+                    });
+
+                    infowindow = new google.maps.InfoWindow({
+                        content: '<h4>' + p.name + '</h4>'
+                    });
+
+                    google.maps.event.addListener(marker, 'click', function() {
+                        infowindow.open(map, marker);
+                    });
+                }
 
                 var drawHitmap = function(places, rate) {
                     heatmap = new google.maps.visualization.HeatmapLayer({
@@ -72,6 +98,7 @@
                             'rgba(75, 210, 92, 1)',
                             'rgba(75, 210, 92, 1)'
                         ];
+                        heatmap.setOptions({opacity: heatmap.get('opacity') ? null : 0.5});
                     } else if (rate == 2) {
                         var gradient = [
                             'rgba(0, 255, 255, 0)',
@@ -106,27 +133,33 @@
                             'rgba(243, 69, 36, 1)',
                             'rgba(243, 69, 36, 1)'
                         ];
+                        heatmap.setOptions({opacity: heatmap.get('opacity') ? null : 0.4});
                     }
 
                     heatmap.setOptions({
                         gradient: heatmap.get('gradient') ? null : gradient
                     });
 
-                    heatmap.setOptions({radius: heatmap.get('radius') ? null : 20});
+                    heatmap.setOptions({radius: heatmap.get('radius') ? null : 28});
                 };
 
                 $.getJSON('/places/', function(data) {
-                    var places = _.map(data.data, function(p) {
+                    var p1 = _.map(data.p1, function(p) {
+                        setPoint(p, 'park');
+                        return new google.maps.LatLng(p.location.lat, p.location.lng);
+                    });
+                    var p2 = _.map(data.p2, function(p) {
+                        setPoint(p, 'park');
+                        return new google.maps.LatLng(p.location.lat, p.location.lng);
+                    });
+                    var p3 = _.map(data.p3, function(p) {
+                        setPoint(p, 'park');
                         return new google.maps.LatLng(p.location.lat, p.location.lng);
                     });
 
-                    var a1 = places.splice(0, 15);
-                    var a2 = places.splice(16, 18);
-                    var a3 = places.splice(19, 49);
-
-                    // drawHitmap(a1, 1);
-                    // drawHitmap(a2, 2);
-                    drawHitmap(a3, 3);
+                    drawHitmap(p1, 1);
+                    drawHitmap(p2, 2);
+                    drawHitmap(p3, 3);
                 });
 
             }
