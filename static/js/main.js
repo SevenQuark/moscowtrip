@@ -6,4 +6,19 @@ $(document).ready(function(){
     $('.mt-star').rating({
         callback: function(value, link){ }
     });
+
+    $('.toggle-sidebar').click(function(){
+        var bar = $('#fluidSidebar');
+        if(bar.is(':hidden')){
+            bar.show();
+            bar.animate({
+                right:0
+            });
+        }else{
+            bar.animate({
+                right:'-300px'
+            },function(){bar.hide();});
+        }
+        return false;
+    })
 });

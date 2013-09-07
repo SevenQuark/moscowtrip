@@ -5,6 +5,9 @@ body{
 html, body { height: 100%; }
 
 .index-container{min-width:1015px;position:relative;}
+
+.navbar-brand{padding: 7px 15px;}
+
 .mt-sidebar{}
 .mt-sidebar .list-group a{border-radius:0;}
 .mt-sidebar .btn-group .btn{cursor:pointer;display:block;height:40px;line-height:40px;margin:0;padding:0 10px;background:#fff;
@@ -70,3 +73,5 @@ html, body { height: 100%; }
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+#fluidSidebar{display:none;position:fixed;right:-300px;width:300px;height:100%;background:#fff;top:50px;box-shadow:0 0 10px #888;}
