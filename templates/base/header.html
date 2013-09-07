@@ -9,10 +9,6 @@
       <a class="navbar-brand" href="/">Moscow Trip</a>
     </div>
     <div class="navbar-collapse collapse">
-      {% url 'dashboard:view' as dashboard_view %}
-      <ul class="nav navbar-nav">
-        <li {% if request.path == dashboard_view %}class="active"{% endif %}><a href="{{ dashboard_view }}">Dashboard</a></li>
-      </ul>
       <ul class="nav navbar-nav navbar-right">
             <li><a href="#" class="toggle-sidebar"><i class="glyphicon glyphicon-tasks"></i>&nbspMy plan</a></li>
       </ul>
