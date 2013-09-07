@@ -2,6 +2,7 @@ import datetime
 from django.utils.translation import ugettext as _
 from auth_pack.models import AbstractEmailUser
 from django.db import models
+from django_countries import CountryField
 
 
 class User(AbstractEmailUser):
@@ -12,6 +13,6 @@ class User(AbstractEmailUser):
 
 
 class DashboardModel(models.Model):
-    date_from = models.DateTimeField(default=lambda: datetime.datetime.now() - datetime.timedelta(days=-3))
-    date_to = models.DateTimeField(default=datetime.datetime.now)
-    location_from = models.CharField(max_length=255)
+    date_from = models.DateField()
+    date_to = models.DateField()
+    country = CountryField()
