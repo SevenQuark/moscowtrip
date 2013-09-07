@@ -8,9 +8,10 @@ body{
     color:#000;border-radius:0;border:none;width:100%;box-shadow:none;text-align:left;}
 .mt-sidebar .btn:hover{background:#eee;border-left:4px solid #d2554f;box-shadow:none;}
 .mt-sidebar .btn.active{background:#eee;border-left:4px solid #d2554f;box-shadow:none;}
-.mt-sidebar .btn-group{margin-bottom:20px;}
+.mt-sidebar .btn-group{}
+.mt-sidebar .stars{margin:0 auto;width:90px;}
 
-.mt-sidebar .divider{height:1px;width:100%;background:#eee;}
+.mt-sidebar .divider{height:1px;width:100%;background:#eee;margin-bottom:20px;}
 .mt-sidebar h5{text-transform:uppercase;text-align:center;}
 
 .mt-container{margin:0 0;padding:0;}
