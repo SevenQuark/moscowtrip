@@ -23,15 +23,11 @@
             <div class="mt-sidebar" role="complementary">
                     <h5>Dates</h5>
                     <div class="btn-group" data-toggle="buttons">
-                      <label class="btn btn-primary active">
-                        <input type="radio" checked="checked"> Monday (20.05.2013)
-                      </label>
-                      <label class="btn btn-primary">
-                        <input type="radio"> Tuesday (21.05.2013)
-                      </label>
-                      <label class="btn btn-primary">
-                        <input type="radio"> Wednesday (22.05.2013)
-                      </label>
+                      {% for d in dashboard.dates %}
+                          <label class="btn btn-primary {% if forloop.first %}active{% endif %}">
+                            <input type="radio" {% if forloop.first %}checked="checked"{% endif %} value="{{ d }}">{{ d|date:"l (m.d.Y)" }}
+                          </label>
+                      {% endfor %}
                     </div>
                     <div class="divider"></div>
                     <h5>Categories</h5>

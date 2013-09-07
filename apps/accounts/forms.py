@@ -16,16 +16,15 @@ class DashboardForm(ModelForm):
     class Meta:
         model = DashboardModel
         widgets = {
-            'date_from': forms.DateInput(attrs={'class': 'form-control', 'autofocus': 'autofocus'}, format='%d.%m.%Y'),
-            'date_to': forms.DateInput(attrs={'class': 'form-control'}, format='%d.%m.%Y'),
-            'country': forms.Select(attrs={'class': 'form-control'})
+            'date_from': forms.DateInput(attrs={'class': 'form-control', 'autofocus': 'autofocus','placeholder':'Date from'}, format='%d.%m.%Y'),
+            'date_to': forms.DateInput(attrs={'class': 'form-control','placeholder':'Date to'}, format='%d.%m.%Y',),
         }
+        exclude = ('country',)
 
     def save(self, commit=True):
-        form_model = super(DashboardForm, self).save(commit=False)
+        form_model = super(DashboardForm, self).save(commit=commit)
         m = hashlib.md5()
         m.update(str(time.time()))
         form_model.hash = m.hexdigest()
-
-        obj = form_model.save()
-        return obj
+        form_model.save()
+        return form_model
