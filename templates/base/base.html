@@ -18,7 +18,7 @@
             <link rel="stylesheet" href="{{ STATIC_URL }}css/styles.css">
             <link rel="stylesheet" href="{{ STATIC_URL }}datepicker/css/datepicker.css">
         {% endblock %}
-        
+
         <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.1/underscore-min.js"></script>
     </head>
     <body>
@@ -43,43 +43,90 @@
             function initialize() {
                 var mapOptions = {
                     center: new google.maps.LatLng(55.7522222, 37.6155556),
-                    zoom: 8,
+                    zoom: 10,
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 };
                 var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 
-                $.getJSON('/places/', function(data) {
-                    var places = _.map(data.data, function(p) {
-                        return new google.maps.LatLng(p.location.lat, p.location.lng);
-                    });
-
+                var drawHitmap = function(places, rate) {
                     heatmap = new google.maps.visualization.HeatmapLayer({
                         data: places
                     });
 
                     heatmap.setMap(map);
 
-                    var gradient = [
-                        'rgba(0, 255, 255, 0)',
-                        'rgba(0, 255, 255, 1)',
-                        'rgba(0, 191, 255, 1)',
-                        'rgba(0, 127, 255, 1)',
-                        'rgba(0, 63, 255, 1)',
-                        'rgba(0, 0, 255, 1)',
-                        'rgba(0, 0, 223, 1)',
-                        'rgba(0, 0, 191, 1)',
-                        'rgba(0, 0, 159, 1)',
-                        'rgba(0, 0, 127, 1)',
-                        'rgba(63, 0, 91, 1)',
-                        'rgba(127, 0, 63, 1)',
-                        'rgba(191, 0, 31, 1)',
-                        'rgba(255, 0, 0, 1)'
-                    ];
+                    if (rate == 1) {
+                        var gradient = [
+                            'rgba(0, 255, 255, 0)',
+                            'rgba(17, 93, 26, 1)',
+                            'rgba(17, 93, 26, 1)',
+                            'rgba(51, 161, 66, 1)',
+                            'rgba(51, 161, 66, 1)',
+                            'rgba(51, 161, 66, 1)',
+                            'rgba(75, 210, 92, 1)',
+                            'rgba(75, 210, 92, 1)',
+                            'rgba(75, 210, 92, 1)',
+                            'rgba(75, 210, 92, 1)',
+                            'rgba(75, 210, 92, 1)',
+                            'rgba(75, 210, 92, 1)',
+                            'rgba(75, 210, 92, 1)',
+                            'rgba(75, 210, 92, 1)'
+                        ];
+                    } else if (rate == 2) {
+                        var gradient = [
+                            'rgba(0, 255, 255, 0)',
+                            'rgba(191, 203, 4, 1)',
+                            'rgba(191, 203, 4, 1)',
+                            'rgba(191, 203, 4, 1)',
+                            'rgba(217, 229, 44, 1)',
+                            'rgba(217, 229, 44, 1)',
+                            'rgba(217, 229, 44, 1)',
+                            'rgba(244, 253, 109, 1)',
+                            'rgba(244, 253, 109, 1)',
+                            'rgba(244, 253, 109, 1)',
+                            'rgba(244, 253, 109, 1)',
+                            'rgba(244, 253, 109, 1)',
+                            'rgba(244, 253, 109, 1)',
+                            'rgba(244, 253, 109, 1)'
+                        ];
+                    } else if (rate == 3) {
+                        var gradient = [
+                            'rgba(0, 255, 255, 0)',
+                            'rgba(169, 40, 15, 1)',
+                            'rgba(169, 40, 15, 1)',
+                            'rgba(219, 55, 24, 1)',
+                            'rgba(219, 55, 24, 1)',
+                            'rgba(219, 55, 24, 1)',
+                            'rgba(243, 69, 36, 1)',
+                            'rgba(243, 69, 36, 1)',
+                            'rgba(243, 69, 36, 1)',
+                            'rgba(243, 69, 36, 1)',
+                            'rgba(243, 69, 36, 1)',
+                            'rgba(243, 69, 36, 1)',
+                            'rgba(243, 69, 36, 1)',
+                            'rgba(243, 69, 36, 1)'
+                        ];
+                    }
 
                     heatmap.setOptions({
                         gradient: heatmap.get('gradient') ? null : gradient
                     });
 
+                    heatmap.setOptions({radius: heatmap.get('radius') ? null : 20});
+                };
+
+                $.getJSON('/places/', function(data) {
+                    var places = _.map(data.data, function(p) {
+                        return new google.maps.LatLng(p.location.lat, p.location.lng);
+                    });
+
+                    var a1 = places.splice(0, 15);
+                    var a2 = places.splice(16, 18);
+                    var a3 = places.splice(19, 49);
+
+                    // drawHitmap(a1, 1);
+                    // drawHitmap(a2, 2);
+                    drawHitmap(a3, 3);
                 });
 
             }
