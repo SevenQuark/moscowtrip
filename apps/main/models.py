@@ -14,5 +14,7 @@ class Place(models.Model):
     day6 = PickledObjectField()
     day7 = PickledObjectField()
 
-    def update_stat(self):
-        print(placer.update_stat(self))
+
+class InstagramImage(models.Model):
+    create_date = models.DateTimeField()
+    place_id = models.ForeignKey(Place)

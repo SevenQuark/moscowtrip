@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 from apps.accounts.forms import DashboardForm
-from django.views.generic import TemplateView
+from apps.accounts.models import DashboardModel
+from django.core.urlresolvers import reverse
+from django.shortcuts import redirect
+from django.views.generic import TemplateView, FormView, CreateView
 from apps.main.utils import JSONView
 from apps.main import placer
 from apps.main.models import Place
@@ -19,14 +22,19 @@ class PlainTextTemplateView(TemplateView):
         return form
 
 
-class DashboardView(TemplateView):
+class DashboardView(CreateView):
 
     template_name = "index.html"
+    form_class = DashboardForm
+    model = DashboardModel
 
-    def get_context_data(self, **kwargs):
-        context = super(DashboardView, self).get_context_data(**kwargs)
-        context['form'] = DashboardForm()
-        return context
+    def get_success_url(self):
+        url = "%s?id=%s" % (reverse('dashboard:view'), '')
+        return url
+
+    def form_valid(self, form):
+        form.save()
+        return redirect(self.get_success_url())
 
 
 class Places(JSONView):
