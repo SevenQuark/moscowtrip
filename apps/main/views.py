@@ -32,10 +32,5 @@ class DashboardView(TemplateView):
 class Places(JSONView):
     def get_context_data(self, **kwargs):
         context = super(Places, self).get_context_data(**kwargs)
-        places = placer.get_places('4bf58dd8d48988d163941735')  # Парки
-        for place in places:
-            Place.objects.get_or_create(place_id=place['id'], defaults={
-                'data': place
-            })
-        context['data'] = places
+        context['data'] = placer.places()
         return context
