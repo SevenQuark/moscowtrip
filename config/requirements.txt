@@ -10,6 +10,6 @@ django-auth-pack==0.1.12
 pytils==0.2.3
 django-zen==0.1.7
 django-templated-email-db==0.4.10
-
-# Libs
+foursquare==2013.07.30
+django-picklefield==0.3.0
 django-countries
