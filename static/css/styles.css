@@ -6,6 +6,7 @@ html, body { height: 100%; }
 
 .index-container{min-width:1015px;position:relative;}
 
+.navbar-brand{padding: 7px 15px;}
 
 .mt-sidebar{}
 .mt-sidebar .list-group a{border-radius:0;}
