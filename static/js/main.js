@@ -4,6 +4,6 @@ $(document).ready(function(){
       $(this).tab('show');
     })
 
-    $('#id_date_to').datepicker({format: 'dd.mm.yyyy'});
-    $('#id_date_from').datepicker({format: 'dd.mm.yyyy'});
+    $('#id_date_to').datepicker({format: 'mm.dd.yyyy'});
+    $('#id_date_from').datepicker({format: 'mm.dd.yyyy'});
 });
