@@ -1,6 +1,9 @@
 body{
   padding-top: 50px;
 }
+
+html, body { height: 100%; }
+
 .index-container{min-width:1015px;position:relative;}
 .mt-sidebar{}
 .mt-sidebar .list-group a{border-radius:0;}
@@ -14,8 +17,9 @@ body{
 .mt-sidebar .divider{height:1px;width:100%;background:#eee;margin-bottom:20px;}
 .mt-sidebar h5{text-transform:uppercase;text-align:center;}
 
-.mt-container{margin:0 0;padding:0;}
-.mt-container .span7{margin-left:200px;}
+.mt-container{margin:0;padding:0;height:100%;}
+.mt-container .row-fluid{height:100%;}
+.mt-container .span7{margin-left:200px;height:100%;}
 
 .mt-icon{height:24px;width:24px;background-position:left center;margin-right:5px;margin-top:7px;background-repeat:no-repeat;display:block;float:left;}
 .park-icon{background-image:url('/static/img/park.png');}
@@ -25,7 +29,7 @@ body{
 .shopping-icon{background-image:url('/static/img/shopping.png');}
 
 
-#map-canvas{height:300px;width:100%;}
+#map-canvas{height:100%;width:100%;}
 
 #bgImage{width:100%;position:absolute;top:0;left:0;min-width:1015px;}
 
