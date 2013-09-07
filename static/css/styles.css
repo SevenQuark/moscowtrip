@@ -2,7 +2,14 @@ body{
   padding-top: 50px;
 }
 .index-container{min-width:1015px;position:relative;}
-.mt-sidenav{background-color:#f7f5fa;padding:0 15px;}
+.mt-sidebar{}
+.mt-sidebar .list-group a{border-radius:0;}
+.mt-sidebar .tree-toggle{cursor:pointer;display:block;height:40px;line-height:40px;margin:0;padding:0 10px;}
+.mt-sidebar .tree-toggle:hover{background:#eee;border-left:4px solid #d2554f;}
+.mt-sidebar .tree-toggle.active{background:#eee;border-left:4px solid #d2554f;}
+.mt-sidebar ul.tree{display:none;}
+.mt-sidebar .divider{height:1px;width:100%;background:#eee;}
+.mt-sidebar h5{text-transform:uppercase;text-align:center;}
 
 .mt-container{margin:0 0;padding:0;}
 .mt-container .span7{margin-left:200px;}
