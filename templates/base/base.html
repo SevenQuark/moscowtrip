@@ -50,12 +50,9 @@
                 var infowindow = null;
                 var setPoint = function(p, category) {
                     var icon;
-                    if (infowindow) {
-                        infowindow.close();
-                    }
 
                     if (category === 'park') {
-                        icon = '/static/img/park.png'
+                        icon = '/static/img/park_round.png'
                     }
 
                     var myLatLng = new google.maps.LatLng(p.location.lat, p.location.lng);
@@ -65,11 +62,14 @@
                         icon: icon
                     });
 
-                    infowindow = new google.maps.InfoWindow({
-                        content: '<h4>' + p.name + '</h4>'
-                    });
-
                     google.maps.event.addListener(marker, 'click', function() {
+                        if (infowindow) {
+                            infowindow.close();
+                        }
+                        infowindow = new google.maps.InfoWindow({
+                            content: '<h4>' + p.name + '</h4>'
+                        });
+
                         infowindow.open(map, marker);
                     });
                 }
