@@ -1,0 +1,12 @@
+# Core
+Django==1.5.1
+mysql-python==1.2.4
+raven==3.4.1
+
+# Django apps
+South==0.8.1
+django-suit==0.2.2
+django-auth-pack==0.1.12
+pytils==0.2.3
+django-zen==0.1.7
+django-templated-email-db==0.4.10

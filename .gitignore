@@ -1,0 +1,34 @@
+*.idea
+
+*.py[co]
+.vagrant
+# Packages
+*.egg
+*.egg-info
+dist
+build
+eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+*.db
+*.cc
+
+# Installer logs
+pip-log.txt
+env
+
+# Unit test / coverage reports
+.coverage
+.tox
+.env
+
+#Translations
+*.mo
+
+#Mr Developer
+.mr.developer.cfg
+Vagrantfile
