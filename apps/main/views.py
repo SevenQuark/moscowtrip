@@ -40,5 +40,7 @@ class DashboardView(CreateView):
 class Places(JSONView):
     def get_context_data(self, **kwargs):
         context = super(Places, self).get_context_data(**kwargs)
-        context['data'] = placer.get_places()
+        context['p1'] = placer.get_places()[:15]
+        context['p2'] = placer.get_places()[15:30]
+        context['p3'] = placer.get_places()[30:]
         return context
