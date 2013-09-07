@@ -4,6 +4,26 @@
 
 {% block content %}
     <div class="container">
-        {{ form }}
+        <form class="form-horizontal" role="form">
+          <div class="form-group">
+            <label for="dateFrom" class="col-lg-2 control-label">Date From</label>
+            <div class="col-lg-10">
+              {{ form.date_from }}
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="dateTo" class="col-lg-2 control-label">Date To</label>
+            <div class="col-lg-10">
+              {{ form.date_to }}
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="couuntry" class="col-lg-2 control-label">Country</label>
+            <div class="col-lg-10">
+              {{ form.country }}
+            </div>
+          </div>
+        </form>
     </div>
+
 {% endblock %}

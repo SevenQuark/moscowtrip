@@ -3,4 +3,7 @@ $(document).ready(function(){
       e.preventDefault();
       $(this).tab('show');
     })
+
+    $('#id_date_to').datepicker()
+    $('#id_date_from').datepicker()
 });
