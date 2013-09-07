@@ -44,9 +44,9 @@ def get_places(categoryId='4bf58dd8d48988d163941735'):
 
 def update():
     from apps.main.models import Place
-    places = get_places('4bf58dd8d48988d181941735')  # Парки
+    places = get_places('4d4b7105d754a06376d81259')  # Парки
     for place in places:
         Place.objects.get_or_create(place_id=place['id'], defaults={
             'data': place,
-            'category': 'museum'
+            'category': 'night'
         })

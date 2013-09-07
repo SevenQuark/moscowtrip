@@ -6,6 +6,7 @@ from django.shortcuts import redirect
 from django.views.generic import TemplateView, CreateView
 from apps.main.utils import JSONView
 from apps.main import placer
+from apps.main.models import Place
 
 
 class PlainTextTemplateView(TemplateView):
@@ -33,11 +34,17 @@ class DashboardCreateView(CreateView):
         return redirect(self.get_success_url())
 
 
-
 class Places(JSONView):
     def get_context_data(self, **kwargs):
         context = super(Places, self).get_context_data(**kwargs)
-        context['p1'] = placer.get_places()[:15]
-        context['p2'] = placer.get_places()[15:30]
-        context['p3'] = placer.get_places()[30:]
+        places = Place.objects.all()
+        result = []
+        for p in places:
+            result.append(dict(
+                category=p.category,
+                data=p.data
+            ))
+        context['p1'] = result[:30]
+        context['p2'] = result[30:60]
+        context['p3'] = result[60:]
         return context
