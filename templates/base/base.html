@@ -13,17 +13,21 @@
 
         {% block css %}
             <link rel="stylesheet" href="{{ STATIC_URL }}css/normalize.min.css">
+            <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.css">
             <link rel="stylesheet" href="{{ STATIC_URL }}css/main.css">
         {% endblock %}
         <script src="{{ STATIC_URL }}js/vendor/modernizr-2.6.2.min.js"></script>
     </head>
     <body>
+        {% block header %}
+            {% include "base/header.html" %}
+        {% endblock %}
         {% block content %}
         {% endblock %}
-
         <script>window.jQuery || document.write('<script src="{{ STATIC_URL }}js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
         {% block js %}
             <script src="{{ STATIC_URL }}js/plugins.js"></script>
+            <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
             <script src="{{ STATIC_URL }}js/main.js"></script>
         {% endblock %}
     </body>
