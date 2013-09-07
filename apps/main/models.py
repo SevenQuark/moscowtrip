@@ -5,6 +5,7 @@ from apps.main import placer
 
 class Place(models.Model):
     place_id = models.CharField(max_length=500)
+    category = models.CharField(max_length=100)
     data = PickledObjectField()
     day1 = PickledObjectField()
     day2 = PickledObjectField()
