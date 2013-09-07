@@ -1,5 +1,6 @@
 from django.db import models
 from picklefield.fields import PickledObjectField
+from apps.main import placer
 
 
 class Place(models.Model):
@@ -12,3 +13,6 @@ class Place(models.Model):
     day5 = PickledObjectField()
     day6 = PickledObjectField()
     day7 = PickledObjectField()
+
+    def update_stat(self):
+        print(placer.update_stat(self))
