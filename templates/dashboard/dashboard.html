@@ -9,45 +9,37 @@
         <div class="row-fluid">
             <div class="span3" style="position:fixed;left:0;width:200px;">
             <div class="mt-sidebar" role="complementary">
-                <h5>Categories</h5>
-                  <ul class="nav nav-list">
-                     <li><label class="tree-toggle nav-header"><span class="mt-icon park-icon"></span>Parks</label>
-                        <ul class="nav nav-list tree">
-                            <li><a href="#">JavaScript</a></li>
-                            <li><a href="#">CSS</a></li>
-                        </ul>
-                    </li>
-                    <li class="divider"></li>
-                    <li><label class="tree-toggle nav-header"><span class="mt-icon museum-icon"></span>Museums</label>
-                        <ul class="nav nav-list tree">
-                            <li><a href="#">Overview</a></li>
-                            <li><a href="#">CSS</a></li>
-                        </ul>
-                    </li>
-                    <li class="divider"></li>
-                     <li><label class="tree-toggle nav-header"><span class="mt-icon club-icon"></span>Night clubs</label>
-                        <ul class="nav nav-list tree">
-                            <li><a href="#">Overview</a></li>
-                            <li><a href="#">CSS</a></li>
-                        </ul>
-                    </li>
-                    <li class="divider"></li>
-                        <li><label class="tree-toggle nav-header"><span class="mt-icon shopping-icon"></span>Shopping</label>
-                        <ul class="nav nav-list tree">
-                            <li><a href="#">Overview</a></li>
-                            <li><a href="#">CSS</a></li>
-                        </ul>
-                    </li>
-                    <li class="divider"></li>
-                </ul>
+                    <h5>Dates</h5>
+                    <div class="btn-group" data-toggle="buttons">
+                      <label class="btn btn-primary active">
+                        <input type="radio" checked="checked"> Monday (20.05.2013)
+                      </label>
+                      <label class="btn btn-primary">
+                        <input type="radio"> Tuesday (21.05.2013)
+                      </label>
+                      <label class="btn btn-primary">
+                        <input type="radio"> Wednesday (22.05.2013)
+                      </label>
+                    </div>
+                    <div class="divider"></div>
+                    <h5>Categories</h5>
+                    <div class="btn-group" data-toggle="buttons">
+                      <label class="btn btn-primary active">
+                        <input type="checkbox" checked="checked"> <span class="mt-icon park-icon"></span>Parks
+                      </label>
+                      <label class="btn btn-primary">
+                        <input type="checkbox"> <span class="mt-icon museum-icon"></span>Museums
+                      </label>
+                      <label class="btn btn-primary">
+                        <input type="checkbox"> <span class="mt-icon club-icon"></span>Night clubs
+                      </label>
+                      <label class="btn btn-primary">
+                        <input type="checkbox"> <span class="mt-icon shopping-icon"></span>Shopping
+                      </label>
+                    </div>
                   </div>
             </div>
             <div class="span7">
-                    <ul class="nav nav-tabs" id="timelineTabs">
-                      <li class="active"><a href="#tab1" data-toggle="tab">Monday 12.12.2013</a></li>
-                      <li><a href="#tab2" data-toggle="tab">Tuesday 13.12.2013</a></li>
-                      <li><a href="#tab3" data-toggle="tab">Wednesday 14.12.2013</a></li>
-                    </ul>
                   <div class="tab-content">
                       <div class="tab-pane active" id="tab1">
                            <div id="map-canvas" style="height: 600px;"></div>
