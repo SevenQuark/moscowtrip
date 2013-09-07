@@ -21,3 +21,10 @@ env.method = local
 @task
 def run():
     django_cmd('runserver')
+
+
+@task
+def shiva():
+    django_sync()
+    south_migrate()
+    django_loaddata('main.json')
