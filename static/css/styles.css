@@ -1,7 +1,7 @@
 body{
   padding-top: 50px;
 }
-
+.index-container{min-width:1015px;position:relative;}
 .mt-sidenav{background-color:#f7f5fa;padding:0 15px;}
 
 .mt-container{margin:0 0;padding:0;}
@@ -9,12 +9,8 @@ body{
 
 #map-canvas{height:300px;width:100%;}
 
+#bgImage{width:100%;position:absolute;top:0;left:0;min-width:1015px;}
 
-body {
-  padding-top: 40px;
-  padding-bottom: 40px;
-  background-color: #eee;
-}
 
 .form-signin {
   max-width: 330px;
@@ -24,6 +20,7 @@ body {
 .form-signin .form-signin-heading,
 .form-signin .checkbox {
   margin-bottom: 10px;
+  color:#fff;
 }
 .form-signin .checkbox {
   font-weight: normal;

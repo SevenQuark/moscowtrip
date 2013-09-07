@@ -36,6 +36,7 @@ INSTALLED_APPS = (
     'auth_pack',
     'apps.main',
     'apps.accounts',
+    'django_countries'
 )
 
 if DEBUG:
@@ -54,7 +55,7 @@ if DEBUG:
 # Langs & Time
 # --------------------------------------------------------------------------------------------------
 TIME_ZONE = 'Europe/Moscow'
-LANGUAGE_CODE = 'ru-ru'
+LANGUAGE_CODE = 'en-en'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
