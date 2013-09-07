@@ -36,6 +36,7 @@ INSTALLED_APPS = (
     'auth_pack',
     'apps.main',
     'apps.accounts',
+    'django_countries'
 )
 
 if DEBUG:

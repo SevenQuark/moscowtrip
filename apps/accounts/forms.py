@@ -4,11 +4,6 @@ from django.forms import ModelForm
 
 
 class DashboardForm(ModelForm):
-    # date_from = forms.DateField(widget=forms.DateInput(format='%d.%m.%Y'),
-    #                             input_formats=('%d/%m/%Y',))
-    # date_to = forms.DateField(widget=forms.DateInput(format='%d.%m.%Y'),
-    #                           input_formats=('%d/%m/%Y',),
-    #                           required=False)
 
     class Meta:
         model = DashboardModel

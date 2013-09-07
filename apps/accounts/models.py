@@ -13,7 +13,7 @@ class User(AbstractEmailUser):
 
 
 class DashboardModel(models.Model):
-    date_from = models.DateField(default=lambda: datetime.date.today() - datetime.timedelta(days=-3))
+    date_from = models.DateField(default=lambda: datetime.date.today() - datetime.timedelta(days=3))
     date_to = models.DateField(default=datetime.date.today)
     country = CountryField()
 
