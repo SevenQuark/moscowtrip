@@ -11,11 +11,6 @@ body{
 
 #bgImage{width:100%;position:absolute;top:0;left:0;min-width:1015px;}
 
-body {
-  padding-top: 40px;
-  padding-bottom: 40px;
-  background-color: #eee;
-}
 
 .form-signin {
   max-width: 330px;
