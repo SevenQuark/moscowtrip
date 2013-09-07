@@ -15,6 +15,7 @@ SITE_ID = 1
 ROOT_URLCONF = 'apps.main.urls'
 WSGI_APPLICATION = 'config.wsgi.application'
 AUTH_USER_MODEL = 'accounts.User'
+FIXTURE_DIRS = (os.path.join(PROJECT_ROOT, 'fixtures'), )
 
 ADMINS = (
     ('Vitaliy Korobkin', 'vitalisbox@gmail.com'),
