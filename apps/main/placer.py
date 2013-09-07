@@ -42,9 +42,11 @@ def get_places(categoryId='4bf58dd8d48988d163941735'):
     return places['venues']
 
 
-def update(categoryId):
-    places = placer.get_places('4bf58dd8d48988d163941735')  # Парки
+def update():
+    from apps.main.models import Place
+    places = get_places('4bf58dd8d48988d181941735')  # Парки
     for place in places:
         Place.objects.get_or_create(place_id=place['id'], defaults={
-            'data': place
+            'data': place,
+            'category': 'museum'
         })
