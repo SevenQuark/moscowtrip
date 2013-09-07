@@ -12,7 +12,11 @@ def places():
     result = []
     places = Place.objects.all()
     for p in places:
-        result.append(p.data)
+        result.append(dict(
+            place=p.data,
+            category='',
+            population=0
+        ))
     return result
 
 
