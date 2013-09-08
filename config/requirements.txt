@@ -2,6 +2,7 @@
 Django==1.5.1
 mysql-python==1.2.4
 raven==3.4.1
+pymongo
 
 # Django apps
 South==0.8.1
