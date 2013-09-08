@@ -8,6 +8,7 @@ from django.views.generic import TemplateView, CreateView
 from apps.main.utils import JSONView
 from apps.main import placer
 from apps.main.models import Place
+from apps.instagram_api.data_driver import get_norm_activities_by_days
 
 
 class PlainTextTemplateView(TemplateView):
@@ -40,6 +41,10 @@ class Places(JSONView):
         category = self.request.GET.get('category', 'museum,').split(',')
         congestion = int(self.request.GET.get('congestion', 0))
         dm = int(self.request.GET.get('dm', 1))
+
+        asd = get_norm_activities_by_days()
+        from pprint import pprint
+        pprint(asd)
 
         context = super(Places, self).get_context_data(**kwargs)
         places = Place.objects.filter(category__in=category)
