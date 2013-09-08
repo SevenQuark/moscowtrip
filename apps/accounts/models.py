@@ -17,7 +17,7 @@ class DashboardModel(models.Model):
     date_to = models.DateField()
     country = CountryField(null=True)
     hash = models.CharField(max_length=32, blank=True)
-    email = models.CharField(blank=True)
+    email = models.CharField(blank=True, max_length=200)
     data = models.TextField(blank=True)
 
 
