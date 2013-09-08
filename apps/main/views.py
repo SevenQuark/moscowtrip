@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import datetime
 from apps.accounts.forms import DashboardForm
 from apps.accounts.models import DashboardModel
 from django.core.urlresolvers import reverse
@@ -62,3 +63,7 @@ class Places(JSONView):
             context['p3'] = result[60:]
 
         return context
+
+
+
+
