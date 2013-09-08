@@ -40,40 +40,55 @@ var SideBarView = Backbone.View.extend({
 
     send_mail: function(){
         var fid_list = [];
-        for( id in this.objects_list){
+
+        var count = 0;
+        for(var id in this.objects_list){
             var fid = id.split('|')[3]
             var date = id.split('|')[2]
             fid_list.push([fid, date]);
+            count++;
 
         }
 
-        var csrf = $.cookie("csrftoken")
-        var email = $('email').value
+        current_url = document.URL
 
+        var email = $('#email').val()
         var data = {};
         data['email'] = email
-        data["csrfmiddlewaretoken"] = csrf;
         data['fidsday'] = fid_list;
 
-//        $.ajax({
-//          type: "POST",
-//          url: '/get_plan/',
-//          data: data
-////          success: success,
-////          dataType: "json"
-//        });
+        var send = {data: JSON.stringify(data)};
 
-        $.ajax({
-            url: '/get_plan/',
-            type: 'POST',
-            data: JSON.stringify(data),
-            contentType: 'application/json; charset=utf-8',
-            dataType: 'json',
-            async: false,
-//            success: function(msg) {
-//                alert(msg);
-//            }
+        $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            function getCookie(name) {
+                var cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    var cookies = document.cookie.split(';');
+                    for (var i = 0; i < cookies.length; i++) {
+                        var cookie = jQuery.trim(cookies[i]);
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+            if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+                // Only send the token to relative URLs i.e. locally.
+                xhr.setRequestHeader('X-CSRFToken', getCookie('csrftoken'));
+            }
+        }
         });
+
+        $.post('/get_plan/', send, function(data, textStatus) {
+          //data contains the JSON object
+          //textStatus contains the status: success, error, etc
+        });
+
+
+
     },
 
     add_event: function(global_hot, global_name, date, fid){
