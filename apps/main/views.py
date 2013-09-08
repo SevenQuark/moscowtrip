@@ -120,16 +120,21 @@ class SavePlanView(View):
         data = json.loads(request.POST.get('data'))
         print data
         mail = data['email']
+        hash = data['hash']
         google_map_url = 'http://maps.googleapis.com/maps/api/staticmap?size=600x300&sensor=false&zoom=13&markers=color:red%7Ccolor:red%7Clabel:C%7C'
         res = []
         for d in data['fidsday']:
             place = Place.objects.get(place_id=d[0])
-            obj = {'fid': d[0], 'date': datetime.datetime.strptime(d[1], '%m-%d-%Y'), 'data': place.data}
+            obj = {'fid': d[0], 'data': place.data}
             url = google_map_url + str(obj['data']['location']['lat']) + ',' + str(obj['data']['location']['lng'])
             obj['map_url'] = url
             res.append(obj)
 
-        json_data = json.dumps(res)
+        json_data = json.dumps({'data': res, 'date': datetime.datetime.strptime(d[1], '%m-%d-%Y').strftime('%m.%d.%Y')})
 
-
-        print res
+        dashboard = DashboardModel.objects.get(hash=hash)
+        dashboard.email = mail
+        dashboard.data = json_data
+        dashboard.save()
+        send_email(message=json.loads(dashboard.data), subject="Your plan from Moscow Trip",send_to=dashboard.email,content_type='html', template="plan.html")
+        return HttpResponse('ok bro')

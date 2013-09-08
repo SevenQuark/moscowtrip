@@ -50,11 +50,12 @@ var SideBarView = Backbone.View.extend({
 
         }
 
-        current_url = document.URL
+        var current_url = document.URL.split('/')[4]
 
-        var email = $('#email').val()
+        var email = $('#email').val();
         var data = {};
-        data['email'] = email
+        data['hash'] = current_url;
+        data['email'] = email;
         data['fidsday'] = fid_list;
 
         var send = {data: JSON.stringify(data)};
