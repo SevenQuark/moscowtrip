@@ -1,4 +1,4 @@
-from apps.main.views import PlainTextTemplateView, PayPal, DashboardCreateView
+from apps.main.views import PlainTextTemplateView, PayPal, DashboardCreateView, SavePlanView
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from apps.main.views import Places
