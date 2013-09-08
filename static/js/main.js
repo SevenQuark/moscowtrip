@@ -20,13 +20,3 @@ $(document).ready(function(){
     });
     initialize();
 });
-
-
-//var Plan = {
-//    init:function(){
-//        $('.add-to-plan-btn').live('click',function(){
-//            alert(11);
-//            return false;
-//        });
-//    }
-//};
