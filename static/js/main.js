@@ -22,11 +22,11 @@ $(document).ready(function(){
 });
 
 
-var Plan = {
-    init:function(){
-        $('.add-to-plan-btn').live('click',function(){
-            alert(11);
-            return false;
-        });
-    }
-};
+//var Plan = {
+//    init:function(){
+//        $('.add-to-plan-btn').live('click',function(){
+//            alert(11);
+//            return false;
+//        });
+//    }
+//};

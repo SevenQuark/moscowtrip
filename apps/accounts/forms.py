@@ -16,8 +16,8 @@ class DashboardForm(ModelForm):
     class Meta:
         model = DashboardModel
         widgets = {
-            'date_from': forms.DateInput(attrs={'class': 'form-control', 'autofocus': 'autofocus','placeholder':'Date from'}, format='%d.%m.%Y'),
-            'date_to': forms.DateInput(attrs={'class': 'form-control','placeholder':'Date to'}, format='%d.%m.%Y',),
+            'date_from': forms.DateInput(attrs={'class': 'form-control', 'autofocus': 'autofocus','placeholder':'Date from', 'autocomplete':'off'   }, format='%d.%m.%Y'),
+            'date_to': forms.DateInput(attrs={'class': 'form-control','placeholder':'Date to', 'autocomplete':'off'}, format='%d.%m.%Y',),
         }
         exclude = ('country',)
 
