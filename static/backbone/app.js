@@ -10,6 +10,7 @@ var SideBarView = Backbone.View.extend({
         this.render();
         this.count = 0;
         this.objects_list = {};
+        this.count_list = {};
     },
 
     render: function(){
@@ -21,8 +22,12 @@ var SideBarView = Backbone.View.extend({
     },
 
     add_event: function(global_hot, global_name, date){
-        if( this.objects_list[global_name + date] < 1){
-            this.objects_list[global_name + date] = 1;
+
+
+        var newVar = (global_hot + global_name + date);
+        if( this.objects_list[  newVar ] == 0 || this.objects_list[newVar] == undefined){
+            this.objects_list[newVar] = 1;
+            this.count_list[this.count] = newVar;
 
             var bar = $('#fluidSidebar');
             if(bar.is(':hidden')){
@@ -38,8 +43,9 @@ var SideBarView = Backbone.View.extend({
             }
 
             var template = _.template($('#list-item').html());
-            this.$el.find('#' + date).append(template({hot: global_hot, name: global_name, count: (global_name + date)}));
-            this.$el.find('#' + this.count + ' .remove-button').on('click', $.proxy( this.remove_item, this ));
+
+            this.$el.find('#' + date).append(template({hot: global_hot, name: global_name, count: this.count}));
+            this.$el.find('#' + this.count+ ' .remove-button').on('click', $.proxy( this.remove_item, this ));
             this.count++;
         }
 
@@ -50,9 +56,11 @@ var SideBarView = Backbone.View.extend({
     remove_item: function(event){
         var id = event.target.parentNode.parentNode.id;
 
-        this.objects_list[id] = 0;
         this.$el.find('#' + id).remove();
         this.count--;
+
+        var key = this.count_list[id];
+        this.objects_list[key] = 0;
 
         if( !this.count ){
             this.hide_list();
