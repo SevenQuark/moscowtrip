@@ -21,7 +21,7 @@
             <div class="span3" style="position:fixed;left:0;width:200px;">
             <div class="mt-sidebar" role="complementary">
                     <h5>Dates</h5>
-                    <div class="btn-group" data-toggle="buttons">
+                    <div class="btn-group" data-toggle="buttons" id="dates">
                       {% for d in dashboard.dates %}
                           <label class="btn btn-primary {% if forloop.first %}active{% endif %}">
                             <input type="radio" {% if forloop.first %}checked="checked"{% endif %} value="{{ d }}">{{ d|date:"l (m.d.Y)" }}

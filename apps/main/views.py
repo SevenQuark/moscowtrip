@@ -38,6 +38,7 @@ class Places(JSONView):
     def get_context_data(self, **kwargs):
         category = self.request.GET.get('category', 'museum,').split(',')
         congestion = int(self.request.GET.get('congestion', 0))
+        dm = int(self.request.GET.get('dm', 1))
 
         context = super(Places, self).get_context_data(**kwargs)
         places = Place.objects.filter(category__in=category)
