@@ -1,4 +1,4 @@
-from apps.main.views import PlainTextTemplateView, DashboardCreateView, SavePlanView
+from apps.main.views import PlainTextTemplateView, DashboardCreateView
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from apps.main.views import Places
@@ -12,5 +12,6 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^places/', Places.as_view()),
     url(r'^get_plan/', SavePlanView.as_view()),
+    url(r'^paypal/', PayPal.as_view()),
     (r'^dashboard/', include('apps.accounts.urls', namespace = 'dashboard'))
 )
