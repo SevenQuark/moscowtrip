@@ -4,7 +4,7 @@ import os
 import socket
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
-DEBUG = False if socket.gethostname() == 'moscowtrip' else True
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 # --------------------------------------------------------------------------------------------------
