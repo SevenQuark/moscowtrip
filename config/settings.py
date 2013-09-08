@@ -104,6 +104,16 @@ TEMPLATE_CONTEXT_PROCESSORS = TCP + (
     'django.core.context_processors.request',
 )
 
+DEFAULT_FROM_EMAIL = 'info@travelatus.com'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+
+SENDGRID_SETTINGS = dict(
+        username="travelatus",
+        password="ksqRfD4IZDrbFFt",
+        secure=True,
+)
+
 # --------------------------------------------------------------------------------------------------
 # Django Suit
 # --------------------------------------------------------------------------------------------------

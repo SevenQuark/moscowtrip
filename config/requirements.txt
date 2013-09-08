@@ -14,3 +14,5 @@ django-templated-email-db==0.4.10
 foursquare==2013.07.30
 django-picklefield==0.3.0
 django-countries
+
+sendgrid==0.1.3
