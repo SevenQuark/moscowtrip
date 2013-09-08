@@ -29,7 +29,13 @@
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary">Send</button>
+          <script src="{{ STATIC_URL }}js/paypal-button.min.js?merchant=vitalisbox@gmail.com"
+              data-button="buynow"
+              data-name="My Trip"
+              data-amount="1"
+              data-callback="http://127.0.0.1:8000/paypal/"
+              data-env="sandbox"
+          ></script>
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

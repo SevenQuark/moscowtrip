@@ -1,9 +1,10 @@
 from django.utils.translation import ugettext as _
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 import os
+import socket
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
-DEBUG = True
+DEBUG = False if socket.gethostname() == 'moscowtrip' else True
 TEMPLATE_DEBUG = DEBUG
 
 # --------------------------------------------------------------------------------------------------
@@ -41,17 +42,16 @@ INSTALLED_APPS = (
     'django_countries'
 )
 
-if DEBUG:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': 'database.db',
-            'USER': '',
-            'PASSWORD': '',
-            'HOST': '',
-            'PORT': '',
-        }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'database.db',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
     }
+}
 
 # --------------------------------------------------------------------------------------------------
 # Langs & Time
@@ -67,7 +67,7 @@ USE_TZ = True
 # --------------------------------------------------------------------------------------------------
 MEDIA_ROOT = ''
 MEDIA_URL = ''
-STATIC_ROOT = ''
+STATIC_ROOT = '' if DEBUG else '/home/deploy/moscowtrip-static'
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
