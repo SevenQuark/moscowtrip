@@ -39,8 +39,6 @@ var SideBarView = Backbone.View.extend({
     },
 
     add_event: function(global_hot, global_name, date, fid){
-        console.log(fid);
-
 
         var newVar = (global_hot + '|' + global_name + '|' + date);
         if( this.objects_list[newVar] == undefined){
@@ -103,10 +101,12 @@ var SideBarView = Backbone.View.extend({
     show_list: function(){
         this.$el.find('#empty-message').hide();
         this.$el.find('#list-container').show();
+        $('#planBar').show();
     },
 
     hide_list: function(){
         this.$el.find('#empty-message').show();
         this.$el.find('#list-container').hide();
+        $('#planBar').hide();
     }
 });
