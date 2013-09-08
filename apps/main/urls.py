@@ -12,7 +12,7 @@ urlpatterns = patterns('',
     url(r'^robots\.txt$', PlainTextTemplateView.as_view(template_name='robots.txt')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^places/', Places.as_view()),
-    url(r'^paypal/', PayPal.as_view()),
+    url(r'^paypal/(?P<clinet_id>.*)/', PayPal.as_view()),
     url(r'^paypal_complate/', PayPalComplete.as_view()),
     (r'^dashboard/', include('apps.accounts.urls', namespace = 'dashboard')),
     (r'^complete/', TemplateView.as_view(template_name='purchase/complete.html'))
