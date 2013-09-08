@@ -38,37 +38,39 @@ class DashboardCreateView(CreateView):
 
 class Places(JSONView):
     def get_context_data(self, **kwargs):
+        context = super(Places, self).get_context_data(**kwargs)
+
         category = self.request.GET.get('category', 'museum,').split(',')
         congestion = int(self.request.GET.get('congestion', 0))
         dm = int(self.request.GET.get('dm', 1))
 
         asd = get_norm_activities_by_days()
-        from pprint import pprint
-        pprint(asd)
 
-        context = super(Places, self).get_context_data(**kwargs)
-        places = Place.objects.filter(category__in=category)
-        result = []
-        for p in places:
-            result.append(dict(
-                category=p.category,
-                data=p.data
-            ))
+        p1 = []
+        p2 = []
+        p3 = []
+        for a in asd:
+            p = Place.objects.get(place_id=a['fid'])
+            con = a['days'][dm - 1]
+            if p.category in category:
+                if con == 1 and congestion in [1, 2, 3, 0]:
+                    p1.append(dict(
+                        category=p.category,
+                        data=p.data
+                    ))
+                if con == 2 and congestion in [2, 3, 0]:
+                    p2.append(dict(
+                        category=p.category,
+                        data=p.data
+                    ))
+                if con == 3 and congestion in [3, 0]:
+                    p3.append(dict(
+                        category=p.category,
+                        data=p.data
+                    ))
 
-        if congestion in [0, 1]:
-            context['p1'] = result[:30]
-
-        if congestion in [0, 2]:
-            context['p1'] = result[:30]
-            context['p2'] = result[30:60]
-
-        if congestion in [0, 3]:
-            context['p1'] = result[:30]
-            context['p2'] = result[30:60]
-            context['p3'] = result[60:]
+        context['p1'] = p1
+        context['p2'] = p2
+        context['p3'] = p3
 
         return context
-
-
-
-

@@ -45,7 +45,7 @@ def get_norm_activities_by_days():
         res.append({'fid': fid, 'days':norm(data['days'], max_day_value) })
 
 
-    print res
+    return res
 
 
 get_norm_activities_by_days()
