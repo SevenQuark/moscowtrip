@@ -42,8 +42,7 @@ def get_norm_activities_by_days():
             max_day_value = temp_max
 
     for fid, data in days_by_fid.items():
-        res.append({'fid': fid, 'days':norm(data['days'], max_day_value) })
-        res.append({'fid': fid, 'days_full':data['days'] })
+        res.append({'fid': fid, 'days':norm(data['days'], max_day_value), 'days_full': data['days']})
 
 
     return res
