@@ -52,20 +52,24 @@ class Places(JSONView):
         for a in asd:
             p = Place.objects.get(place_id=a['fid'])
             con = a['days'][dm - 1]
+            days_full =  a['days_full'][dm - 1]
             if p.category in category:
                 if con == 1 and congestion in [1, 2, 3, 0]:
                     p1.append(dict(
                         category=p.category,
+                        days_full=days_full,
                         data=p.data
                     ))
                 if con == 2 and congestion in [2, 3, 0]:
                     p2.append(dict(
                         category=p.category,
+                        days_full=days_full,
                         data=p.data
                     ))
                 if con == 3 and congestion in [3, 0]:
                     p3.append(dict(
                         category=p.category,
+                        days_full=days_full,
                         data=p.data
                     ))
 
