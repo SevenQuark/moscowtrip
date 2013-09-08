@@ -12,6 +12,7 @@ from apps.instagram_api.data_driver import get_norm_activities_by_days
 from django import http
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import View
+from django.http import HttpResponse
 
 
 class PlainTextTemplateView(TemplateView):
@@ -27,7 +28,13 @@ class PlainTextTemplateView(TemplateView):
 
 class PayPal(View):
     def post(self, request):
-        print self.request.POST
+        receiver_email = self.request.POST['receiver_email']
+        payment_status = self.request.POST['payment_status']
+
+        if payment_status and payment_status[0] == 'Completed':
+            # SEND MAIL to receiver_email
+            pass
+
         return HttpResponse('Ok')
 
     @csrf_exempt
