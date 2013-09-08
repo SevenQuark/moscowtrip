@@ -28,6 +28,7 @@ class PlainTextTemplateView(TemplateView):
 
 class PayPal(View):
     def post(self, request):
+        print(request.POST)
         receiver_email = self.request.POST['receiver_email']
         payment_status = self.request.POST['payment_status']
 
@@ -48,7 +49,7 @@ class PayPalComplete(View):
 
     @csrf_exempt
     def dispatch(self, *args, **kwargs):
-        return super(PayPal, self).dispatch(*args, **kwargs)
+        return super(PayPalComplete, self).dispatch(*args, **kwargs)
 
 
 
