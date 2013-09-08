@@ -39,6 +39,31 @@
         </script>
 
         <script type="text/javascript">
+            var categories = ['museum', 'park'];
+            var congestion = 0;
+
+            $('.mt-star').rating({
+                callback: function(value, link) {
+                    if (value !== undefined) {
+                        congestion = value;
+                        initialize();
+                    }
+                }
+            });
+
+
+            $(document).ready(function() {
+                $('#categories label').click(function() {
+                    var cat = $(this).data('name');
+                    if (_.contains(categories, cat)) {
+                        delete categories[categories.indexOf(cat)];
+                    } else {
+                        categories.push(cat);
+                    }
+                    initialize();
+                });
+            });
+
             function initialize() {
                 var mapOptions = {
                     center: new google.maps.LatLng(55.7522222, 37.6155556),
@@ -146,7 +171,10 @@
                     heatmap.setOptions({radius: heatmap.get('radius') ? null : 28});
                 };
 
-                $.getJSON('/places/?category=museum,night', function(data) {
+                var url = '/places/?category=';
+                url += categories.join();
+                url += '&congestion=' + congestion;
+                $.getJSON(url, function(data) {
                     var p1 = _.map(data.p1, function(p) {
                         setPoint(p.data, p.category);
                         return new google.maps.LatLng(p.data.location.lat, p.data.location.lng);

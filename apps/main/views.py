@@ -37,6 +37,7 @@ class DashboardCreateView(CreateView):
 class Places(JSONView):
     def get_context_data(self, **kwargs):
         category = self.request.GET.get('category', 'museum,').split(',')
+        congestion = int(self.request.GET.get('congestion', 0))
 
         context = super(Places, self).get_context_data(**kwargs)
         places = Place.objects.filter(category__in=category)
@@ -46,7 +47,17 @@ class Places(JSONView):
                 category=p.category,
                 data=p.data
             ))
-        context['p1'] = result[:30]
-        context['p2'] = result[30:60]
-        context['p3'] = result[60:]
+
+        if congestion in [0, 1]:
+            context['p1'] = result[:30]
+
+        if congestion in [0, 2]:
+            context['p1'] = result[:30]
+            context['p2'] = result[30:60]
+
+        if congestion in [0, 3]:
+            context['p1'] = result[:30]
+            context['p2'] = result[30:60]
+            context['p3'] = result[60:]
+
         return context
