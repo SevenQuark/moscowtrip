@@ -1,5 +1,5 @@
 <h2>Your plan from Moscow Trip</h2><br/>
-{% for item in plan %}
+{% for item in data.plan %}
     <p><b>{{ item.date }}</b></p><br/>
     {% for place in item.places %}
         <p>{{ place.name }}</p><br/>
