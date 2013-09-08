@@ -33,7 +33,7 @@
             <script src="{{ STATIC_URL }}datepicker/js/bootstrap-datepicker.js"></script>
             <script src="{{ STATIC_URL }}js/moment.min.js"></script>
         {% endblock %}
-        <script src="{{ STATIC_URL }}js/main.js"></script>
+
         <script type="text/javascript"
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACPb3ZN5DlolsrFVdDSjX9MMBeyQUzogs&sensor=true&libraries=visualization">
         </script>
@@ -103,9 +103,10 @@
                             infowindow.close();
                         }
                         infowindow = new google.maps.InfoWindow({
-                            content: '<h4>' + p.name + '</h4>'
-                        });
+                            content: '<h4>' + p.name + '</h4>'+
+                                    '<button type="button" class="btn btn-default btn-sm add-to-plan-btn">Add to plan</button>'
 
+                        });
                         infowindow.open(map, marker);
                     });
                 }
@@ -201,9 +202,8 @@
                     drawHitmap(p2, 2);
                     drawHitmap(p3, 3);
                 });
-
             }
-            google.maps.event.addDomListener(window, 'load', initialize);
         </script>
+        <script src="{{ STATIC_URL }}js/main.js"></script>
     </body>
 </html>

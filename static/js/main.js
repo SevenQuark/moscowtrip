@@ -17,5 +17,16 @@ $(document).ready(function(){
             },function(){bar.hide();});
         }
         return false;
-    })
+    });
+    initialize();
 });
+
+
+var Plan = {
+    init:function(){
+        $('.add-to-plan-btn').live('click',function(){
+            alert(11);
+            return false;
+        });
+    }
+};
