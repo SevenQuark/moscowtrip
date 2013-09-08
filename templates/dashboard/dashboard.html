@@ -26,7 +26,7 @@
           <h4 class="modal-title">Send your plan on email</h4>
         </div>
         <div class="modal-body">
-
+            <input type="text" id="email">
         </div>
         <div class="modal-footer">
           <script src="{{ STATIC_URL }}js/paypal-button.min.js?merchant=vitalisbox@gmail.com"
@@ -36,6 +36,9 @@
               data-callback="http://127.0.0.1:8000/paypal/"
               data-env="sandbox"
           ></script>
+        </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="send-plan">Send</button>
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

@@ -4,7 +4,7 @@ from apps.accounts.forms import DashboardForm
 from apps.accounts.models import DashboardModel
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
-from django.views.generic import TemplateView, CreateView
+from django.views.generic import TemplateView, CreateView, View, FormView
 from apps.main.utils import JSONView
 from apps.main import placer
 from apps.main.models import Place
@@ -78,3 +78,8 @@ class Places(JSONView):
         context['p3'] = p3
 
         return context
+
+
+class SavePlanView(FormView):
+    def post(self, request, *args, **kwargs):
+        print request.POST

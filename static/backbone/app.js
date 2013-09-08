@@ -3,7 +3,6 @@
 var SideBarView = Backbone.View.extend({
 
     events: {
-        'click #clear-button': 'clearList'
     },
 
     initialize: function(){
@@ -20,6 +19,7 @@ var SideBarView = Backbone.View.extend({
         this.$el.html(template({count: this.count}));
 
         this.$el.find('#clear-button').on('click', $.proxy( this.clearList, this ));
+        $('#send-plan').on('click', $.proxy( this.send_mail, this ));
         return this;
 
     },
@@ -38,9 +38,46 @@ var SideBarView = Backbone.View.extend({
 
     },
 
-    add_event: function(global_hot, global_name, date, fid){
+    send_mail: function(){
+        var fid_list = [];
+        for( id in this.objects_list){
+            var fid = id.split('|')[3]
+            var date = id.split('|')[2]
+            fid_list.push([fid, date]);
 
-        var newVar = (global_hot + '|' + global_name + '|' + date);
+        }
+
+        var csrf = $.cookie("csrftoken")
+        var email = $('email').value
+
+        var data = {};
+        data['email'] = email
+        data["csrfmiddlewaretoken"] = csrf;
+        data['fidsday'] = fid_list;
+
+//        $.ajax({
+//          type: "POST",
+//          url: '/get_plan/',
+//          data: data
+////          success: success,
+////          dataType: "json"
+//        });
+
+        $.ajax({
+            url: '/get_plan/',
+            type: 'POST',
+            data: JSON.stringify(data),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            async: false,
+//            success: function(msg) {
+//                alert(msg);
+//            }
+        });
+    },
+
+    add_event: function(global_hot, global_name, date, fid){
+        var newVar = (global_hot + '|' + global_name + '|' + date + '|' + fid);
         if( this.objects_list[newVar] == undefined){
 
             this.count_list[this.count] = newVar;
