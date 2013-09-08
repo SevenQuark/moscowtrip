@@ -10,7 +10,7 @@ TEMPLATE_DEBUG = DEBUG
 # --------------------------------------------------------------------------------------------------
 # Commons
 # --------------------------------------------------------------------------------------------------
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['moscowtrip.travelatus.com']
 SECRET_KEY = 'o&%s+vcs-1$-4yvm-ezffl1#xu104%=wf%(wu_c2b3#kykz@oq'
 SITE_ID = 1
 ROOT_URLCONF = 'apps.main.urls'
