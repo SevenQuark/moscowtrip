@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import datetime
 from apps.accounts.forms import DashboardForm
 from apps.accounts.models import DashboardModel
 from django.core.urlresolvers import reverse
@@ -7,6 +8,7 @@ from django.views.generic import TemplateView, CreateView
 from apps.main.utils import JSONView
 from apps.main import placer
 from apps.main.models import Place
+from apps.instagram_api.data_driver import get_norm_activities_by_days
 
 
 class PlainTextTemplateView(TemplateView):
@@ -37,6 +39,12 @@ class DashboardCreateView(CreateView):
 class Places(JSONView):
     def get_context_data(self, **kwargs):
         category = self.request.GET.get('category', 'museum,').split(',')
+        congestion = int(self.request.GET.get('congestion', 0))
+        dm = int(self.request.GET.get('dm', 1))
+
+        asd = get_norm_activities_by_days()
+        from pprint import pprint
+        pprint(asd)
 
         context = super(Places, self).get_context_data(**kwargs)
         places = Place.objects.filter(category__in=category)
@@ -46,7 +54,21 @@ class Places(JSONView):
                 category=p.category,
                 data=p.data
             ))
-        context['p1'] = result[:30]
-        context['p2'] = result[30:60]
-        context['p3'] = result[60:]
+
+        if congestion in [0, 1]:
+            context['p1'] = result[:30]
+
+        if congestion in [0, 2]:
+            context['p1'] = result[:30]
+            context['p2'] = result[30:60]
+
+        if congestion in [0, 3]:
+            context['p1'] = result[:30]
+            context['p2'] = result[30:60]
+            context['p3'] = result[60:]
+
         return context
+
+
+
+
