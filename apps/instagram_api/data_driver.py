@@ -26,7 +26,7 @@ def group_data(start_date, end_date):
 
 
 def norm(days_list, max_val):
-    return [int(round(float(math.log(day + 1))*2 / math.log(max_val + 1))) + 1 for day in days_list]
+    return [int(math.ceil(float(math.log(day + 1))*2 / math.log(max_val + 1))) + 1 for day in days_list]
 
 
 def get_norm_activities_by_days():
@@ -48,4 +48,4 @@ def get_norm_activities_by_days():
     print res
 
 
-# get_norm_activities_by_days(None, None)
+get_norm_activities_by_days()
