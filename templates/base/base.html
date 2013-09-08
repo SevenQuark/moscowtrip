@@ -39,6 +39,9 @@
         </script>
 
         <script type="text/javascript">
+            function xxx() {
+                alert('xxxxxxx');
+            }
             var categories = ['museum', 'park'];
             var congestion = 0;
             var eld = $('#dates label:first').find('input').val();
@@ -104,7 +107,7 @@
                         }
                         infowindow = new google.maps.InfoWindow({
                             content: '<h4>' + p.name + '</h4>'+
-                                    '<button type="button" class="btn btn-default btn-sm add-to-plan-btn">Add to plan</button>'
+                                    '<button type="button" onclick=\"xxx()\" class="btn btn-default btn-sm add-to-plan-btn">Add to plan</button>'
 
                         });
                         infowindow.open(map, marker);
