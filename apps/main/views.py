@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 import datetime
+import json
 from apps.accounts.forms import DashboardForm
 from apps.accounts.models import DashboardModel
+from apps.email.sender import send_email
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.views.generic import TemplateView, CreateView
@@ -35,8 +37,8 @@ class PayPal(View):
 
         if payment_status and payment_status[0] == 'Completed':
             # SEND MAIL to receiver_email
-            pass
-
+            db =  DashboardModel.objects.get(hash=client_id)
+            send_email(message=json.loads(db.data), subject="Your plan from Moscow Trip",send_to=db.email,content_type='html', template="plan.html")
         return HttpResponse('Ok')
 
     @csrf_exempt
