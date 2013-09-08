@@ -43,6 +43,7 @@ def get_norm_activities_by_days():
 
     for fid, data in days_by_fid.items():
         res.append({'fid': fid, 'days':norm(data['days'], max_day_value) })
+        res.append({'fid': fid, 'days_full':data['days'] })
 
 
     return res

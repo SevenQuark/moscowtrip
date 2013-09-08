@@ -32,6 +32,9 @@
             <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
             <script src="{{ STATIC_URL }}datepicker/js/bootstrap-datepicker.js"></script>
             <script src="{{ STATIC_URL }}js/moment.min.js"></script>
+            <script src="{{ STATIC_URL }}js/backbone-min.js"></script>
+            <script src="{{ STATIC_URL }}js/underscore-min.js"></script>
+            <script src="{{ STATIC_URL }}backbone/app.js"></script>
         {% endblock %}
 
         <script type="text/javascript"
@@ -58,6 +61,11 @@
 
 
             $(document).ready(function() {
+                var SideBar = new SideBarView();
+                $('#sidebar').html(SideBar.el)
+
+
+
                 $('#categories label').click(function() {
                     var cat = $(this).data('name');
                     if (_.contains(categories, cat)) {
@@ -83,7 +91,7 @@
                 };
                 var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
                 var infowindow = null;
-                var setPoint = function(p, category) {
+                var setPoint = function(p, category, hot) {
                     var icon;
 
                     if (category === 'park') {
@@ -108,10 +116,13 @@
                             infowindow.close();
                         }
                         infowindow = new google.maps.InfoWindow({
-                            content: '<h4>' + p.name + '</h4>'+
+                            content: '<h4>' + p.name + hot + '</h4>'+
                                     '<button type="button" onclick=\"xxx()\" class="btn btn-default btn-sm add-to-plan-btn">Add to plan</button>'
 
                         });
+                        
+
+
                         infowindow.open(map, marker);
                     });
                 }
@@ -191,15 +202,15 @@
                 url += '&dm=' + dm;
                 $.getJSON(url, function(data) {
                     var p1 = _.map(data.p1, function(p) {
-                        setPoint(p.data, p.category);
+                        setPoint(p.data, p.category, 1);
                         return new google.maps.LatLng(p.data.location.lat, p.data.location.lng);
                     });
                     var p2 = _.map(data.p2, function(p) {
-                        setPoint(p.data, p.category);
+                        setPoint(p.data, p.category, 2);
                         return new google.maps.LatLng(p.data.location.lat, p.data.location.lng);
                     });
                     var p3 = _.map(data.p3, function(p) {
-                        setPoint(p.data, p.category);
+                        setPoint(p.data, p.category, 3);
                         return new google.maps.LatLng(p.data.location.lat, p.data.location.lng);
                     });
 
