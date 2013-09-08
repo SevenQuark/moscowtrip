@@ -4,7 +4,7 @@ body{
 
 html, body { height: 100%; }
 
-.index-container{min-width:1015px;position:relative;}
+.index-container{min-width:1015px;position:relative;margin-top:100px;}
 
 .navbar-brand{padding: 7px 15px;}
 
@@ -42,7 +42,7 @@ html, body { height: 100%; }
 .form-signin {
   max-width: 330px;
   padding: 15px;
-  margin: 0 auto;
+  /*margin: 0 auto;*/
 }
 .form-signin .form-signin-heading,
 .form-signin .checkbox {
