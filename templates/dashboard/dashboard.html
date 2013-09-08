@@ -25,7 +25,7 @@
                     <div class="btn-group" data-toggle="buttons" id="dates">
                       {% for d in dashboard.dates %}
                           <label class="btn btn-primary {% if forloop.first %}active{% endif %}">
-                            <input type="radio" {% if forloop.first %}checked="checked"{% endif %} value="{{ d }}">{{ d|date:"l (m.d.Y)" }}
+                            <input class="date-radiobutton" type="radio" {% if forloop.first %}checked="checked"{% endif %} id="{{ d|date:"m-d-Y" }}">{{ d|date:"l (m.d.Y)" }}
                           </label>
                       {% endfor %}
                     </div>
@@ -68,38 +68,41 @@
                           <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-send"></span>&nbsp;send on email</button>
                           <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-print"></span>&nbsp;print</button>
                     </div>
-                    <% if( empty){ %>
-                        <h3><span class="label label-default">Your plan is empty</span></h3>
-                    <% } else { %>
-                        <ul class="nav nav-pills nav-stacked">
+
+                        <h3 style="<% if( !empty){ %>display:none;<% } %>" id="empty-message"><span class="label label-default">Your plan is empty</span></h3>
+
+                        <ul class="nav nav-pills nav-stacked" id="list-container" style="<% if( empty){ %>display:none;<% } %>">
                           {% for d in dashboard.dates %}
-                              <li class="active" id="{{ d }}">
+                              <li class="active">
                                 <a>
                                   <span class="badge pull-right">0</span>
                                   {{ d|date:"l (m.d.Y)" }}
                                 </a>
-                                <div class="events-list">
-{#                                    <div class="event-item">#}
-{#                                        <a href="#"><i class="glyphicon glyphicon-remove-circle" style="color:#d2554f"></i></a>#}
-{#                                        <span class="text-success">Some relax event</span>#}
-{#                                    </div>#}
-{#                                    <div class="event-item">#}
-{#                                         <a href="#"><i class="glyphicon glyphicon-remove-circle" style="color:#d2554f"></i></a>#}
-{#                                         <span class="text-warning">Some crowdy event</span>#}
-{#                                    </div>#}
-{#                                    <div class="event-item">#}
-{#                                         <a href="#"><i class="glyphicon glyphicon-remove-circle" style="color:#d2554f"></i></a>#}
-{#                                         <span class="text-danger">Some hardcore event</span>#}
-{#                                    </div>#}
+                                <div class="events-list" id="{{ d|date:"m-d-Y" }}">
+
                                 </div>
                               </li>
                           {% endfor %}
                         </ul>
-                    <% } %>
-                </div>
+                    </div>
                 </div>
             </div>
           </div>
         </script>
     </div>
+    <div class="event-item">
+                                         <a href="#"><i class="glyphicon glyphicon-remove-circle" style="color:#d2554f"></i></a>
+                                         <span class="text-warning">Some crowdy event</span>
+                                    </div>
+                                    <div class="event-item">
+                                         <a href="#"><i class="glyphicon glyphicon-remove-circle" style="color:#d2554f"></i></a>
+                                         <span class="text-danger">Some hardcore event</span>
+                                    </div>
+ <script type="text/template" id="list-item">
+    <div class="event-item">
+    <a href="#"><i class="glyphicon glyphicon-remove-circle" style="color:#d2554f"></i></a>
+    <span class="text-success">Some relax event</span>
+</div>
+
+ </script>
 {% endblock %}

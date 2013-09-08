@@ -29,6 +29,11 @@ def norm(days_list, max_val):
     return [int(math.ceil(float(math.log(day + 1))*2 / math.log(max_val + 1))) + 1 for day in days_list]
 
 
+def norm_by_place(days_list):
+    max_val = max(days_list)
+    return [int(round(float(day)*2 / max_val)) + 1 for day in days_list]
+
+
 def get_norm_activities_by_days():
     start_date = datetime.datetime.strptime('01.07.2013', '%d.%m.%Y')
     end_date = datetime.datetime.strptime('08.07.2013', '%d.%m.%Y')
@@ -42,7 +47,8 @@ def get_norm_activities_by_days():
             max_day_value = temp_max
 
     for fid, data in days_by_fid.items():
-        res.append({'fid': fid, 'days':norm(data['days'], max_day_value), 'days_full': data['days']})
+        norm_days = norm_by_place(data['days'])
+        res.append({'fid': fid, 'days': norm_days, 'days_full': data['days']})
 
 
     return res

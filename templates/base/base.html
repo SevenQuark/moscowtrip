@@ -42,9 +42,8 @@
         </script>
 
         <script type="text/javascript">
-            function xxx() {
-                alert('xxxxxxx');
-            }
+            global_add_event = function(){};
+
             var categories = ['museum', 'park'];
             var congestion = 0;
             var eld = $('#dates label:first').find('input').val();
@@ -64,7 +63,12 @@
                 var SideBar = new SideBarView();
                 $('#sidebar').html(SideBar.el)
 
+                global_add_event = function add_event() {
+                    var date = $('#dates .active').children()[0].id;
 
+                    console.log(global_hot, global_name, date);
+                    SideBar.add_event(global_hot, global_name, date);
+                };
 
                 $('#categories label').click(function() {
                     var cat = $(this).data('name');
@@ -91,7 +95,7 @@
                 };
                 var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
                 var infowindow = null;
-                var setPoint = function(p, category, days_full, hot) {
+                var setPoint = function(p, category, hot, dates_full) {
                     var icon;
 
                     if (category === 'park') {
@@ -110,17 +114,21 @@
                         map: map,
                         icon: icon
                     });
-                    console.log(p);
+
                     google.maps.event.addListener(marker, 'click', function() {
                         if (infowindow) {
                             infowindow.close();
                         }
+                        global_hot = hot;
+                        global_name = p.name;
                         infowindow = new google.maps.InfoWindow({
-                            content: '<h4>' + p.name + '</h4>'+
-                                    '<p>avg. number of visits: '+ days_full+'</p>'+
-                                    '<button type="button" onclick=\"xxx()\" class="btn btn-sm btn-success add-to-plan-btn">Add to plan</button>'
+                            content: '<h4>' + p.name + hot + '</h4>'+ '<p>avg. number of visits: ' + dates_full + '</p>' +
+                                    '<button type="button" onclick=\"global_add_event()\" class="btn btn-success btn-sm add-to-plan-btn">Add to plan</button>'
 
                         });
+                        
+
+
                         infowindow.open(map, marker);
                     });
                 }
@@ -200,15 +208,15 @@
                 url += '&dm=' + dm;
                 $.getJSON(url, function(data) {
                     var p1 = _.map(data.p1, function(p) {
-                        setPoint(p.data, p.category, p.days_full, 1);
+                        setPoint(p.data, p.category, 1, p.days_full);
                         return new google.maps.LatLng(p.data.location.lat, p.data.location.lng);
                     });
                     var p2 = _.map(data.p2, function(p) {
-                        setPoint(p.data, p.category, p.days_full, 2);
+                        setPoint(p.data, p.category, 2, p.days_full);
                         return new google.maps.LatLng(p.data.location.lat, p.data.location.lng);
                     });
                     var p3 = _.map(data.p3, function(p) {
-                        setPoint(p.data, p.category, p.days_full, 3);
+                        setPoint(p.data, p.category, 3, p.days_full);
                         return new google.maps.LatLng(p.data.location.lat, p.data.location.lng);
                     });
 
