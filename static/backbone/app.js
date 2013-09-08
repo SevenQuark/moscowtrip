@@ -3,7 +3,6 @@
 var SideBarView = Backbone.View.extend({
 
     events: {
-        'click #clear-button': 'clearList'
     },
 
     initialize: function(){
@@ -20,6 +19,7 @@ var SideBarView = Backbone.View.extend({
         this.$el.html(template({count: this.count}));
 
         this.$el.find('#clear-button').on('click', $.proxy( this.clearList, this ));
+        $('#send-plan').on('click', $.proxy( this.send_mail, this ));
         return this;
 
     },
@@ -38,9 +38,61 @@ var SideBarView = Backbone.View.extend({
 
     },
 
-    add_event: function(global_hot, global_name, date, fid){
+    send_mail: function(){
+        var fid_list = [];
 
-        var newVar = (global_hot + '|' + global_name + '|' + date);
+        var count = 0;
+        for(var id in this.objects_list){
+            var fid = id.split('|')[3]
+            var date = id.split('|')[2]
+            fid_list.push([fid, date]);
+            count++;
+
+        }
+
+        current_url = document.URL
+
+        var email = $('#email').val()
+        var data = {};
+        data['email'] = email
+        data['fidsday'] = fid_list;
+
+        var send = {data: JSON.stringify(data)};
+
+        $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            function getCookie(name) {
+                var cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    var cookies = document.cookie.split(';');
+                    for (var i = 0; i < cookies.length; i++) {
+                        var cookie = jQuery.trim(cookies[i]);
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+            if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+                // Only send the token to relative URLs i.e. locally.
+                xhr.setRequestHeader('X-CSRFToken', getCookie('csrftoken'));
+            }
+        }
+        });
+
+        $.post('/get_plan/', send, function(data, textStatus) {
+          //data contains the JSON object
+          //textStatus contains the status: success, error, etc
+        });
+
+
+
+    },
+
+    add_event: function(global_hot, global_name, date, fid){
+        var newVar = (global_hot + '|' + global_name + '|' + date + '|' + fid);
         if( this.objects_list[newVar] == undefined){
 
             this.count_list[this.count] = newVar;

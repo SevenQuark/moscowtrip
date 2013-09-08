@@ -35,6 +35,7 @@
             <script src="{{ STATIC_URL }}js/backbone-min.js"></script>
             <script src="{{ STATIC_URL }}js/underscore-min.js"></script>
             <script src="{{ STATIC_URL }}backbone/app.js"></script>
+            <script src="{{ STATIC_URL }}js/jquery.cookie.js"></script>
         {% endblock %}
 
         <script type="text/javascript"
@@ -208,15 +209,15 @@
                 url += '&dm=' + dm;
                 $.getJSON(url, function(data) {
                     var p1 = _.map(data.p1, function(p) {
-                        setPoint(p.data, p.category, 1, p.days_full, data.fid);
+                        setPoint(p.data, p.category, 1, p.days_full, p.data.id);
                         return new google.maps.LatLng(p.data.location.lat, p.data.location.lng);
                     });
                     var p2 = _.map(data.p2, function(p) {
-                        setPoint(p.data, p.category, 2, p.days_full, data.fid);
+                        setPoint(p.data, p.category, 2, p.days_full, p.data.id);
                         return new google.maps.LatLng(p.data.location.lat, p.data.location.lng);
                     });
                     var p3 = _.map(data.p3, function(p) {
-                        setPoint(p.data, p.category, 3, p.days_full, data.fid);
+                        setPoint(p.data, p.category, 3, p.days_full, p.data.id);
                         return new google.maps.LatLng(p.data.location.lat, p.data.location.lng);
                     });
 

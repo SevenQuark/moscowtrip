@@ -6,7 +6,8 @@ from apps.accounts.models import DashboardModel
 from apps.email.sender import send_email
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
-from django.views.generic import TemplateView, CreateView
+from django.utils.decorators import method_decorator
+from django.views.generic import TemplateView, CreateView, View, FormView
 from apps.main.utils import JSONView
 from apps.main import placer
 from apps.main.models import Place
@@ -112,3 +113,23 @@ class Places(JSONView):
         context['p3'] = p3
 
         return context
+
+
+class SavePlanView(View):
+    def post(self, request):
+        data = json.loads(request.POST.get('data'))
+        print data
+        mail = data['email']
+        google_map_url = 'http://maps.googleapis.com/maps/api/staticmap?size=600x300&sensor=false&zoom=13&markers=color:red%7Ccolor:red%7Clabel:C%7C'
+        res = []
+        for d in data['fidsday']:
+            place = Place.objects.get(place_id=d[0])
+            obj = {'fid': d[0], 'date': datetime.datetime.strptime(d[1], '%m-%d-%Y'), 'data': place.data}
+            url = google_map_url + str(obj['data']['location']['lat']) + ',' + str(obj['data']['location']['lng'])
+            obj['map_url'] = url
+            res.append(obj)
+
+        json_data = json.dumps(res)
+
+
+        print res
