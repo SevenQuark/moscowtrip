@@ -25,7 +25,7 @@
                     <div class="btn-group" data-toggle="buttons" id="dates">
                       {% for d in dashboard.dates %}
                           <label class="btn btn-primary {% if forloop.first %}active{% endif %}">
-                            <input class="date-radiobutton" type="radio" {% if forloop.first %}checked="checked"{% endif %} id="{{ d|date:"m-d-Y" }}">{{ d|date:"l (m.d.Y)" }}
+                            <input class="date-radiobutton" type="radio" {% if forloop.first %}checked="checked"{% endif %} value="{{ d }}" id="{{ d|date:"m-d-Y" }}">{{ d|date:"l (m.d.Y)" }}
                           </label>
                       {% endfor %}
                     </div>
