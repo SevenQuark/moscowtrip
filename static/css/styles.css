@@ -9,7 +9,7 @@ html, body { height: 100%; }
 .navbar-brand{padding: 7px 15px;}
 
 .fluid-sidebar-wrapper{padding-top:45px;height:100%;}
-.mt-sidebar{margin:-55px 0 0 10px;overflow-y:scroll;height:100%;padding-top:20px;padding-bottom:10px;}
+.mt-sidebar{margin:-55px 0 0;overflow-y:scroll;height:100%;padding-top:20px;padding-bottom:10px;}
 
 .mt-sidebar .list-group a{border-radius:0;}
 .mt-sidebar .btn-group .btn{cursor:pointer;display:block;height:40px;line-height:40px;margin:0;padding:0 10px;background:#fff;
