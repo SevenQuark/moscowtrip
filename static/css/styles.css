@@ -75,3 +75,10 @@ html, body { height: 100%; }
 }
 
 #fluidSidebar{display:none;position:fixed;right:-300px;width:300px;height:100%;background:#fff;top:50px;box-shadow:0 0 10px #888;}
+.fluid-sidebar-wrapper{padding-top:35px;height:100%;}
+.fluid-sidebar-content{margin:-35px 0 0 10px;overflow-y:scroll;height:100%;padding-top:10px}
+.fluid-sidebar-content .btn-group{margin-bottom:10px;}
+
+
+.events-list{margin-top:5px;}
+.event-item{margin:5px 0;}

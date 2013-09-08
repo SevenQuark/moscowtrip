@@ -3,7 +3,7 @@
 
 {% block css %}
      {{ block.super }}
-     <link rel="stylesheet" href="{{ STATIC_URL }}js/jq-rating/jquery.rating.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}js/jq-rating/jquery.rating.css" xmlns="http://www.w3.org/1999/html">
 {% endblock %}
 
 {% block js %}
@@ -56,7 +56,42 @@
             <div class="span7">
                 <div id="map-canvas"></div>
             </div>
-            <div class="span3" id="fluidSidebar"></div>
+            <div class="span3" id="fluidSidebar">
+                  <div class="fluid-sidebar-wrapper">
+                <div class="fluid-sidebar-content">
+                    <div class="btn-group" style="width:100%;">
+                          <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span>clear</button>
+                          <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-send"></span>&nbsp;send on email</button>
+                          <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-print"></span>&nbsp;print</button>
+                    </div>
+{#                    <h3><span class="label label-default">Your plan is empty</span></h3>#}
+                    <ul class="nav nav-pills nav-stacked">
+                      {% for d in dashboard.dates %}
+                          <li class="active">
+                            <a>
+                              <span class="badge pull-right">0</span>
+                              {{ d|date:"l (m.d.Y)" }}
+                            </a>
+                            <div class="events-list">
+                                <div class="event-item">
+                                    <a href="#"><i class="glyphicon glyphicon-remove-circle" style="color:#d2554f"></i></a>
+                                    <span class="text-success">Some relax event</span>
+                                </div>
+                                <div class="event-item">
+                                     <a href="#"><i class="glyphicon glyphicon-remove-circle" style="color:#d2554f"></i></a>
+                                     <span class="text-warning">Some crowdy event</span>
+                                </div>
+                                <div class="event-item">
+                                     <a href="#"><i class="glyphicon glyphicon-remove-circle" style="color:#d2554f"></i></a>
+                                     <span class="text-danger">Some hardcore event</span>
+                                </div>
+                            </div>
+                          </li>
+                      {% endfor %}
+                    </ul>
+                </div>
+                </div>
+            </div>
           </div>
     </div>
 {% endblock %}
