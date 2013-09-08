@@ -28,6 +28,7 @@ class PlainTextTemplateView(TemplateView):
 
 class PayPal(View):
     def post(self, request):
+        print(request.POST)
         receiver_email = self.request.POST['receiver_email']
         payment_status = self.request.POST['payment_status']
 
