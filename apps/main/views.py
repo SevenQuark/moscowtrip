@@ -9,6 +9,7 @@ from apps.main.utils import JSONView
 from apps.main import placer
 from apps.main.models import Place
 from apps.instagram_api.data_driver import get_norm_activities_by_days
+from django import http
 
 
 class PlainTextTemplateView(TemplateView):
@@ -20,6 +21,13 @@ class PlainTextTemplateView(TemplateView):
     def get_context_data(self, **kwargs):
         form = DashboardForm()
         return form
+
+
+class PayPal(TemplateView):
+    def post(self, request, *args, **kwargs):
+        print self.request.GET
+        print self.request.POST
+        return http.HttpResponseGone()
 
 
 class DashboardCreateView(CreateView):
