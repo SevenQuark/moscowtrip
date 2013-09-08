@@ -30,6 +30,8 @@ class PlainTextTemplateView(TemplateView):
 
 class PayPal(View):
     def post(self, request):
+        print(request.POST)
+        print(self.kwargs['client_id'])
         receiver_email = self.request.POST['receiver_email']
         payment_status = self.request.POST['payment_status']
 
@@ -42,6 +44,16 @@ class PayPal(View):
     @csrf_exempt
     def dispatch(self, *args, **kwargs):
         return super(PayPal, self).dispatch(*args, **kwargs)
+
+
+class PayPalComplete(View):
+    def post(self, request):
+        return http.HttpResponseRedirect('/complete/')
+
+    @csrf_exempt
+    def dispatch(self, *args, **kwargs):
+        return super(PayPalComplete, self).dispatch(*args, **kwargs)
+
 
 
 class DashboardCreateView(CreateView):

@@ -36,6 +36,8 @@ html, body { height: 100%; }
 
 #map-canvas{height:100%;width:100%;}
 
+.purchase_complete{text-align:center;color:#fff;}
+
 #bgImage{width:100%;position:absolute;top:0;left:0;min-width:1015px;}
 
 
