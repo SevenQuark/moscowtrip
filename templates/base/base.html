@@ -66,7 +66,7 @@
                 global_add_event = function add_event() {
                     var date = $('#dates .active').children()[0].id;
 
-                    SideBar.add_event(global_hot, global_name, date);
+                    SideBar.add_event(global_hot, global_name, date, global_fid);
                 };
 
                 $('#categories label').click(function() {
@@ -94,7 +94,7 @@
                 };
                 var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
                 var infowindow = null;
-                var setPoint = function(p, category, hot, dates_full) {
+                var setPoint = function(p, category, hot, dates_full, fid) {
                     var icon;
 
                     if (category === 'park') {
@@ -120,6 +120,7 @@
                         }
                         global_hot = hot;
                         global_name = p.name;
+                        global_fid = fid;
                         infowindow = new google.maps.InfoWindow({
                             content: '<h4>' + p.name + '</h4>'+ '<p>avg. number of visits: ' + dates_full + '</p>' +
                                     '<button type="button" onclick=\"global_add_event()\" class="btn btn-success btn-sm add-to-plan-btn">Add to plan</button>'
@@ -207,15 +208,15 @@
                 url += '&dm=' + dm;
                 $.getJSON(url, function(data) {
                     var p1 = _.map(data.p1, function(p) {
-                        setPoint(p.data, p.category, 1, p.days_full);
+                        setPoint(p.data, p.category, 1, p.days_full, data.fid);
                         return new google.maps.LatLng(p.data.location.lat, p.data.location.lng);
                     });
                     var p2 = _.map(data.p2, function(p) {
-                        setPoint(p.data, p.category, 2, p.days_full);
+                        setPoint(p.data, p.category, 2, p.days_full, data.fid);
                         return new google.maps.LatLng(p.data.location.lat, p.data.location.lng);
                     });
                     var p3 = _.map(data.p3, function(p) {
-                        setPoint(p.data, p.category, 3, p.days_full);
+                        setPoint(p.data, p.category, 3, p.days_full, data.fid);
                         return new google.maps.LatLng(p.data.location.lat, p.data.location.lng);
                     });
 

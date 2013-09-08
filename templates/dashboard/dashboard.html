@@ -64,7 +64,7 @@
                   <div class="fluid-sidebar-wrapper">
                 <div class="fluid-sidebar-content">
                     <div class="btn-group" style="width:100%;">
-                          <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span>clear</button>
+                          <button id="clear-button" type="button" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span>clear</button>
                           <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-send"></span>&nbsp;send on email</button>
                           <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-print"></span>&nbsp;print</button>
                     </div>
@@ -75,7 +75,7 @@
                           {% for d in dashboard.dates %}
                               <li class="active">
                                 <a>
-                                  <span class="badge pull-right">0</span>
+                                  <span class="badge pull-right" id="{{ d|date:"m-d-Y-" }}">0</span>
                                   {{ d|date:"l (m.d.Y)" }}
                                 </a>
                                 <div class="events-list" id="{{ d|date:"m-d-Y" }}">
