@@ -30,7 +30,6 @@ class PayPal(View):
     def post(self, request, client_id):
         print(request.POST)
         print(client_id)
-        print(self.kwargs['client_id'])
         receiver_email = self.request.POST['receiver_email']
         payment_status = self.request.POST['payment_status']
 
