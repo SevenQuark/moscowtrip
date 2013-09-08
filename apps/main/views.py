@@ -10,6 +10,8 @@ from apps.main import placer
 from apps.main.models import Place
 from apps.instagram_api.data_driver import get_norm_activities_by_days
 from django import http
+from django.views.decorators.csrf import csrf_exempt
+from django.views.generic.base import View
 
 
 class PlainTextTemplateView(TemplateView):
@@ -23,11 +25,14 @@ class PlainTextTemplateView(TemplateView):
         return form
 
 
-class PayPal(TemplateView):
-    def post(self, request, *args, **kwargs):
-        print self.request.GET
+class PayPal(View):
+    def post(self, request):
         print self.request.POST
-        return http.HttpResponseGone()
+        return HttpResponse('Ok')
+
+    @csrf_exempt
+    def dispatch(self, *args, **kwargs):
+        return super(PayPal, self).dispatch(*args, **kwargs)
 
 
 class DashboardCreateView(CreateView):
