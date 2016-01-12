@@ -17,11 +17,9 @@ env.project_root = PROJECT_ROOT
 env.virtualenv_root = os.path.join(PROJECT_ROOT, '.env')
 env.method = local
 
-
 @task
 def run():
     django_cmd('runserver')
-
 
 @task
 def shiva():
